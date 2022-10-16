@@ -4,6 +4,8 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.service import Service
+import chromedriver_autoinstaller
 
 def emailAgent():
     try:
@@ -80,7 +82,8 @@ def hosting():
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usuage")
     chrome_options.add_argument("--no-sandbox")
-    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    chromedriver_autoinstaller.install()
+    browser = webdriver.Chrome(options=chrome_options)
     return browser
  
 while True:
@@ -90,6 +93,7 @@ while True:
     data.close()
 
     browser = hosting()
+    #browser = webdriver.Chrome("C:/chromedriver/chromedriver")
     browser.maximize_window()
     browser.get('https://www.daft.ie/auth/authenticate')
 

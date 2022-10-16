@@ -1,4 +1,5 @@
 import json
+import os
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -73,13 +74,22 @@ def loopFunction():
     except IndexError:
         print("Error in loop")
 
+def hosting():
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usuage")
+    chrome_options.add_argument("--no-sandbox")
+    browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=chrome_options)
+    return browser
+ 
 while True:
 
-    data = open(r'C:/Users/nBalbadri/Desktop/python-automation/IdsforAppliedAds.json')
+    data = open(r'IdsforAppliedAds.json')
     idsForAppliedAds = json.load(data)
     data.close()
 
-    browser = webdriver.Chrome('C:/chromedriver/chromedriver')
+    browser = hosting()
     browser.maximize_window()
     browser.get('https://www.daft.ie/auth/authenticate')
 
@@ -104,7 +114,7 @@ while True:
     acceptcookies_btn.click()
 
 
-    browser.get('https://www.daft.ie/sharing/ireland?rentalPrice_to=1000&ownerOccupied=false&firstPublishDate_from=now-1d%2Fd&sort=publishDateDesc&location=dublin-city&location=swords-dublin')
+    browser.get('https://www.daft.ie/sharing/ireland?rentalPrice_to=1000&ownerOccupied=false&firstPublishDate_from=now-3d%2Fd&sort=publishDateDesc&location=dublin-city&location=swords-dublin')
 
     time.sleep(2)
 
@@ -115,7 +125,7 @@ while True:
                
     loopFunction()
 
-    a_file = open("C:/Users/nBalbadri/Desktop/python-automation/IdsforAppliedAds.json", "w")
+    a_file = open("IdsforAppliedAds.json", "w")
     json.dump(idsForAppliedAds, a_file)
     a_file.close()
 

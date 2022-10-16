@@ -115,7 +115,7 @@ while True:
     acceptcookies_btn.click()
 
 
-    browser.get('https://www.daft.ie/sharing/ireland?rentalPrice_to=1000&ownerOccupied=false&firstPublishDate_from=now-3d%2Fd&sort=publishDateDesc&location=dublin-city&location=swords-dublin')
+    browser.get('https://www.daft.ie/sharing/ireland?rentalPrice_to=1000&ownerOccupied=false&firstPublishDate_from=now-1d%2Fd&sort=publishDateDesc&location=dublin-city&location=swords-dublin')
 
     time.sleep(2)
 
